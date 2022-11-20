@@ -11,10 +11,35 @@ let uiSlice = createSlice({
 });
 let cartSlice = createSlice({
   name: "cart",
-  initialState: { items: [], totalAmount: 0 },
+  initialState: { items: [], totalQuantity: 0 },
   reducers: {
-    addItem(state, action) {},
-    removeItem(state, action) {},
+    addItem(state, action) {
+      let item = action.payload;
+      let indexItem = state.items.find((el) => el.id === item.id);
+      if (indexItem) {
+        indexItem.quantity++;
+        indexItem.total += indexItem.price;
+      } else {
+        state.items.push({
+          id: item.id,
+          price: item.price,
+          total: item.price,
+          quantity: 1,
+          title: item.title,
+        });
+      }
+      state.totalQuantity++;
+    },
+    removeItem(state, action) {
+      let id = action.payload;
+      let indexItem = state.items.find((el) => el.id === id);
+
+      if (indexItem.quantity === 1) {
+        state.items = state.items.filter((el) => el.quantity > 1);
+      }
+      indexItem.quantity--;
+      indexItem.total -= indexItem.price;
+    },
   },
 });
 export let uiAction = uiSlice.actions;
