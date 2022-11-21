@@ -4,7 +4,7 @@ import classes from "./Products.module.css";
 const Products = (props) => {
   let dummyList = [
     {
-      title: "pencil",
+      title: "Test",
       price: 6,
       id: "el1",
     },
@@ -14,6 +14,14 @@ const Products = (props) => {
       id: "el2",
     },
   ];
+  /** let [data, setData] = useState([]);
+  useEffect(() => {
+    fetch(
+      "https://react-projects-160bb-default-rtdb.firebaseio.com/cart/items.json"
+    )
+      .then((response) => response.json())
+      .then((data) => setData(data));
+  }, []); */
   return (
     <section className={classes.products}>
       <h2>Buy your favorite products</h2>
