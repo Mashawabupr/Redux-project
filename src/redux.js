@@ -35,10 +35,11 @@ let cartSlice = createSlice({
       let indexItem = state.items.find((el) => el.id === id);
 
       if (indexItem.quantity === 1) {
-        state.items = state.items.filter((el) => el.quantity > 1);
+        state.items = state.items.filter((el) => el.id !== id);
       }
       indexItem.quantity--;
       indexItem.total -= indexItem.price;
+      state.totalQuantity--;
     },
   },
 });
